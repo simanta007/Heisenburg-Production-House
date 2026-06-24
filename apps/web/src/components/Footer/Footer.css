@@ -1,0 +1,34 @@
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 2;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.foot .mono {
+  color: var(--faint);
+}
+
+.foot-soc {
+  display: flex;
+  gap: 18px;
+}
+
+.foot-soc a {
+  color: var(--muted);
+  transition: color 0.25s;
+}
+
+.foot-soc a:hover {
+  color: var(--ember);
+}

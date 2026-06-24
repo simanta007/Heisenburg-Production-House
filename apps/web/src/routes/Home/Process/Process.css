@@ -1,0 +1,41 @@
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.step {
+  position: relative;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.step .n {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  color: var(--ember);
+}
+
+.step h4 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  margin: 14px 0 8px;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 860px) {
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}

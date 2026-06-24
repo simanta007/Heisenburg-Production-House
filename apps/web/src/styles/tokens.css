@@ -1,0 +1,14 @@
+:root {
+  --bg: #100d0b;
+  --bg-2: #161210;
+  --surface: #1c1714;
+  --line: #2a2320;
+  --ink: #f3ece3;
+  --muted: #9a8e83;
+  --faint: #6b6259;
+  --ember: #f0833c;
+  --ember-deep: #c9621f;
+  --teal: #2c6f69;
+  --teal-glow: #3e8f87;
+  --maxw: 1180px;
+}

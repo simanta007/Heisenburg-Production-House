@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heisenburg Production House — We cook videos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100D0B;          /* warm near-black */
+    --bg-2:#161210;        /* lifted surface */
+    --surface:#1C1714;     /* cards */
+    --line:#2A2320;        /* hairlines */
+    --ink:#F3ECE3;         /* warm off-white */
+    --muted:#9A8E83;       /* warm grey */
+    --faint:#6B6259;
+    --ember:#F0833C;       /* tungsten / heat accent */
+    --ember-deep:#C9621F;
+    --teal:#2C6F69;        /* shadow grade */
+    --teal-glow:#3E8F87;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* film grain overlay */
+  .grain{
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    opacity:.045;mix-blend-mode:screen;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+  .mono{font-family:'Space Mono',monospace}
+  .eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ember);
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:2px}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;
+    background:linear-gradient(to bottom,rgba(16,13,11,.92),rgba(16,13,11,0));
+    backdrop-filter:blur(6px);
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque';font-weight:800;font-size:18px;letter-spacing:-.01em}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--ember);box-shadow:0 0 12px var(--ember);animation:rec 1.8s steps(1,end) infinite}
+  @keyframes rec{50%{opacity:.25}}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a.link{font-size:14px;color:var(--muted);transition:color .25s}
+  .nav-links a.link:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.04em;
+    padding:11px 20px;border-radius:2px;border:1px solid var(--ember);
+    color:var(--bg);background:var(--ember);font-weight:700;
+    transition:transform .2s ease,box-shadow .25s ease,background .2s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(240,131,60,.35)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--ember);color:var(--ember);box-shadow:none}
+  .nav-toggle{display:none;background:none;border:0;color:var(--ink);font-size:24px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;min-height:100svh;display:flex;align-items:center;
+    padding:120px 0 60px;
+    background:
+      radial-gradient(120% 80% at 80% 0%,rgba(240,131,60,.16),transparent 55%),
+      radial-gradient(110% 90% at 0% 100%,rgba(44,111,105,.20),transparent 55%),
+      var(--bg);
+  }
+  .hero::before,.hero::after{content:"";position:absolute;left:0;right:0;height:46px;z-index:2;pointer-events:none}
+  .hero::before{top:0;background:linear-gradient(var(--bg),transparent)}
+  .hero::after{bottom:0;background:linear-gradient(transparent,var(--bg))}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:30px;width:100%}
+  .slate{display:flex;flex-wrap:wrap;gap:18px;align-items:center;color:var(--faint);font-size:12px}
+  .slate .tc{color:var(--teal-glow)}
+  h1.title{
+    font-family:'Bricolage Grotesque';font-weight:800;
+    font-size:clamp(54px,12vw,150px);line-height:.9;letter-spacing:-.03em;
+    margin:6px 0 4px;
+  }
+  h1.title .em{
+    color:transparent;-webkit-text-stroke:1.5px var(--ember);
+    position:relative;
+  }
+  .lede{max-width:600px;color:var(--muted);font-size:clamp(16px,2.2vw,20px);margin-top:6px}
+  .lede b{color:var(--ink);font-weight:600}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .corner-tc{
+    position:absolute;right:28px;bottom:26px;z-index:3;
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--faint);
+    display:flex;align-items:center;gap:8px;
+  }
+  .corner-tc .rd{width:7px;height:7px;border-radius:50%;background:#e0413a;box-shadow:0 0 10px #e0413a;animation:rec 1.4s steps(1,end) infinite}
+
+  /* ---------- MARQUEE ---------- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-2);overflow:hidden;position:relative;z-index:2}
+  .strip-track{display:flex;gap:48px;white-space:nowrap;padding:16px 0;width:max-content;animation:slide 32s linear infinite}
+  .strip-track span{font-family:'Bricolage Grotesque';font-weight:600;font-size:15px;letter-spacing:.05em;color:var(--faint);text-transform:uppercase;display:inline-flex;align-items:center;gap:48px}
+  .strip-track span::after{content:"●";color:var(--ember);font-size:9px}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:104px 0;position:relative;z-index:2}
+  .sec-head{margin-bottom:48px;max-width:680px}
+  .sec-head h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(32px,5vw,56px);line-height:1;letter-spacing:-.02em;margin:14px 0 0}
+  .sec-head p{color:var(--muted);margin-top:16px;font-size:17px}
+
+  /* primary service cards */
+  .tracks{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .track{
+    position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:4px;padding:34px 32px 30px;overflow:hidden;
+    transition:transform .3s ease,border-color .3s ease;
+  }
+  .track::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--ember),var(--ember-deep))}
+  .track:nth-child(2)::before{background:linear-gradient(90deg,var(--teal-glow),var(--teal))}
+  .track:hover{transform:translateY(-5px);border-color:#3a302b}
+  .track .tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg);background:var(--ember);padding:4px 9px;border-radius:2px;font-weight:700}
+  .track:nth-child(2) .tag{background:var(--teal-glow)}
+  .track h3{font-family:'Bricolage Grotesque';font-weight:800;font-size:30px;letter-spacing:-.02em;margin:20px 0 10px}
+  .track p.desc{color:var(--muted);font-size:15.5px;margin-bottom:22px}
+  .track ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
+  .track ul li{display:flex;gap:11px;font-size:14.5px;color:var(--ink)}
+  .track ul li::before{content:"›";color:var(--ember);font-family:'Space Mono',monospace}
+  .track:nth-child(2) ul li::before{color:var(--teal-glow)}
+  .track .who{font-size:13px;color:var(--faint);margin-bottom:24px;border-top:1px dashed var(--line);padding-top:16px}
+  .track a.cta{font-family:'Space Mono',monospace;font-size:13.5px;font-weight:700;color:var(--ember);display:inline-flex;align-items:center;gap:9px;transition:gap .25s}
+  .track:nth-child(2) a.cta{color:var(--teal-glow)}
+  .track a.cta:hover{gap:16px}
+
+  /* secondary services */
+  .also{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .also-card{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+    background:transparent;border:1px solid var(--line);border-radius:4px;
+    padding:24px 26px;transition:background .3s ease,border-color .3s ease;
+  }
+  .also-card:hover{background:var(--bg-2);border-color:#332b26}
+  .also-card .sm-tag{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+  .also-card h4{font-family:'Bricolage Grotesque';font-weight:600;font-size:20px;margin:8px 0 7px}
+  .also-card p{color:var(--muted);font-size:14px;max-width:46ch}
+  .also-card a{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--muted);white-space:nowrap;border:1px solid var(--line);padding:9px 14px;border-radius:2px;transition:all .25s}
+  .also-card a:hover{color:var(--ember);border-color:var(--ember)}
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
+  .step{position:relative;padding-top:26px;border-top:1px solid var(--line)}
+  .step .n{font-family:'Space Mono',monospace;font-size:12px;color:var(--ember)}
+  .step h4{font-family:'Bricolage Grotesque';font-weight:600;font-size:19px;margin:14px 0 8px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* work / reel */
+  .reel{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .frame{
+    aspect-ratio:4/5;border:1px solid var(--line);border-radius:4px;overflow:hidden;
+    position:relative;display:flex;align-items:flex-end;
+    background:
+      radial-gradient(120% 70% at 70% 10%,rgba(240,131,60,.13),transparent 60%),
+      radial-gradient(120% 80% at 10% 100%,rgba(44,111,105,.18),transparent 60%),
+      var(--bg-2);
+    transition:transform .3s ease;
+  }
+  .frame:hover{transform:translateY(-4px)}
+  .frame .meta{padding:16px;width:100%}
+  .frame .meta .k{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--faint);letter-spacing:.12em}
+  .frame .meta .t{font-family:'Bricolage Grotesque';font-weight:600;font-size:17px;margin-top:5px}
+  .frame .badge{position:absolute;top:13px;left:13px;font-family:'Space Mono',monospace;font-size:10px;color:var(--teal-glow);border:1px solid var(--teal);padding:2px 7px;border-radius:2px;letter-spacing:.1em}
+  .reel-note{margin-top:22px;color:var(--faint);font-size:13.5px;font-family:'Space Mono',monospace}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:54px;align-items:start}
+  .about-grid p{color:var(--muted);font-size:16.5px;margin-bottom:18px}
+  .about-grid p b{color:var(--ink);font-weight:600}
+  .facts{display:flex;flex-direction:column;gap:18px}
+  .fact{border-left:2px solid var(--ember);padding-left:18px}
+  .fact .v{font-family:'Bricolage Grotesque';font-weight:800;font-size:26px}
+  .fact .l{color:var(--muted);font-size:13.5px}
+
+  /* contact */
+  .contact{
+    background:
+      radial-gradient(110% 120% at 100% 0%,rgba(240,131,60,.14),transparent 55%),
+      var(--bg-2);
+    border-top:1px solid var(--line);
+  }
+  .contact-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+  .contact h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(34px,6vw,62px);line-height:.96;letter-spacing:-.02em}
+  .contact p{color:var(--muted);margin-top:18px;font-size:17px;max-width:42ch}
+  .contact-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:30px}
+  .contact-card .row{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .contact-card .row:last-of-type{border-bottom:0}
+  .contact-card .row .k{font-family:'Space Mono',monospace;color:var(--faint);font-size:12px;letter-spacing:.1em}
+  .contact-card .row a:hover{color:var(--ember)}
+  .contact-card .btn{width:100%;justify-content:center;margin-top:22px}
+
+  footer{padding:40px 0;border-top:1px solid var(--line);position:relative;z-index:2}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;color:var(--faint);font-size:13px}
+  .foot .mono{color:var(--faint)}
+  .foot-soc{display:flex;gap:18px}
+  .foot-soc a{color:var(--muted)}
+  .foot-soc a:hover{color:var(--ember)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* responsive */
+  @media (max-width:860px){
+    .tracks,.also,.about-grid,.contact-inner{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .reel{grid-template-columns:1fr 1fr}
+    .nav-links{
+      position:fixed;inset:64px 14px auto 14px;flex-direction:column;align-items:flex-start;
+      gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:6px;
+      padding:24px;display:none;
+    }
+    .nav-links.open{display:flex}
+    .nav-toggle{display:block}
+    .corner-tc{display:none}
+  }
+  @media (max-width:480px){
+    .steps,.reel{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <a href="#top" class="brand"><span class="dot"></span>HEISENBURG</a>
+  <div class="nav-links" id="menu">
+    <a class="link" href="#services">Services</a>
+    <a class="link" href="#process">Process</a>
+    <a class="link" href="#work">Work</a>
+    <a class="link" href="#about">About</a>
+    <a class="btn" href="#contact">Start a project</a>
+  </div>
+  <button class="nav-toggle" id="toggle" aria-label="Menu">☰</button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid reveal in">
+    <div class="slate mono">
+      <span>HEISENBURG PRODUCTION HOUSE</span>
+      <span>·</span>
+      <span>CYPRUS</span>
+      <span>·</span>
+      <span class="tc">SCENE 01 — TAKE 01</span>
+    </div>
+    <h1 class="title">We&nbsp;cook<br><span class="em">videos.</span></h1>
+    <p class="lede">A Cyprus-based film house that takes a project from <b>first frame to final cut</b> — we shoot, we edit, we deliver. You stay behind the story; we handle the rest.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#contact">Start a project</a>
+      <a class="btn ghost" href="#services">See what we cook ↓</a>
+    </div>
+  </div>
+  <div class="corner-tc"><span class="rd"></span>REC <span id="tc">00:00:00:00</span></div>
+</header>
+
+<div class="strip">
+  <div class="strip-track">
+    <span>Wedding Films<span></span></span><span>Brand Films</span><span>Events</span><span>Reels &amp; Shorts</span><span>Color Grading</span><span>Cinematic Edits</span>
+    <span>Wedding Films</span><span>Brand Films</span><span>Events</span><span>Reels &amp; Shorts</span><span>Color Grading</span><span>Cinematic Edits</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">02 — What we cook</span>
+      <h2>Two ways to work with us.</h2>
+      <p>Need the whole thing handled? Take the full-production track. Already shooting and just buried in post? Hand us the footage.</p>
+    </div>
+
+    <div class="tracks">
+      <!-- FULL PRODUCTION -->
+      <div class="track reveal">
+        <span class="tag">End-to-end</span>
+        <h3>Full Production</h3>
+        <p class="desc">Concept to final cut, fully managed. We plan it, our crew shoots it, our editors grade and cut it. One team, one point of contact, zero headache for you.</p>
+        <ul>
+          <li>Wedding &amp; event films</li>
+          <li>Brand &amp; commercial films</li>
+          <li>On-location shooting in Cyprus</li>
+          <li>Direction, edit, color &amp; sound</li>
+        </ul>
+        <div class="who">For couples, brands and businesses who want the finished film, not the process.</div>
+        <a class="cta" href="#contact">Start a project →</a>
+      </div>
+
+      <!-- VIDEO EDITING ONLY -->
+      <div class="track reveal">
+        <span class="tag">Post-production only</span>
+        <h3>Video Editing</h3>
+        <p class="desc">Already shot it? Send us the raw footage and get back a cinematic edit on a predictable turnaround. Built for studios and creators who'd rather be behind the camera than stuck in a timeline.</p>
+        <ul>
+          <li>Wedding &amp; highlight edits</li>
+          <li>Short-form: reels, shorts, ads</li>
+          <li>Color grading &amp; sound mix</li>
+          <li>White-label for other studios</li>
+        </ul>
+        <div class="who">For videographers and studios who shoot plenty but run out of editing hours.</div>
+        <a class="cta" href="#contact">Send us your footage →</a>
+      </div>
+    </div>
+
+    <!-- SECONDARY SERVICES -->
+    <div class="also">
+      <div class="also-card reveal">
+        <div>
+          <span class="sm-tag">Also available</span>
+          <h4>Digital Marketing</h4>
+          <p>Great video deserves an audience. We help brands grow online — social content, paid ads, web and content strategy — so the work doesn't just look good, it sells.</p>
+        </div>
+        <a href="#contact">Ask what we can do</a>
+      </div>
+      <div class="also-card reveal">
+        <div>
+          <span class="sm-tag">New</span>
+          <h4>AI Automation</h4>
+          <p>The newest thing we cook. Simple automations that hand business owners back their time — bookings, follow-ups and lead handling, quietly running in the background.</p>
+        </div>
+        <a href="#contact">Book a free intro call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">03 — How it runs</span>
+      <h2>From raw to final cut.</h2>
+      <p>A simple, predictable process whether we're shooting it or just editing it.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="n mono">STEP 01</div><h4>Brief</h4><p>We learn your story, references, style and deadline — so we cut for what you actually want.</p></div>
+      <div class="step reveal"><div class="n mono">STEP 02</div><h4>Shoot / Send</h4><p>We film on location, or you upload your raw footage. Clear handover, no chaos.</p></div>
+      <div class="step reveal"><div class="n mono">STEP 03</div><h4>Edit &amp; grade</h4><p>Cut, color, sound and motion — assembled into a film that feels cinematic, not generic.</p></div>
+      <div class="step reveal"><div class="n mono">STEP 04</div><h4>Deliver</h4><p>Review, revisions, then final delivery in every format you need — ready to publish.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">04 — Selected work</span>
+      <h2>The reel.</h2>
+      <p>A taste of what we shoot and cut. Full showreel landing soon.</p>
+    </div>
+    <div class="reel">
+      <div class="frame reveal"><span class="badge">FILM</span><div class="meta"><div class="k mono">WEDDING</div><div class="t">Cinematic Wedding Films</div></div></div>
+      <div class="frame reveal"><span class="badge">FILM</span><div class="meta"><div class="k mono">BRAND</div><div class="t">Brand &amp; Commercial</div></div></div>
+      <div class="frame reveal"><span class="badge">EDIT</span><div class="meta"><div class="k mono">EVENT</div><div class="t">Event Coverage</div></div></div>
+      <div class="frame reveal"><span class="badge">EDIT</span><div class="meta"><div class="k mono">SOCIAL</div><div class="t">Reels &amp; Shorts</div></div></div>
+    </div>
+    <p class="reel-note">// Showreel in production — get in touch for samples in the meantime.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <span class="eyebrow">05 — Who we are</span>
+        <h2 style="font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(30px,5vw,50px);line-height:1;letter-spacing:-.02em;margin:14px 0 26px">A small house with a big kitchen.</h2>
+        <p>Heisenburg is a Cyprus-based production house built on one idea: clients want the <b>finished film</b>, not the headache of producing it. So we run the whole kitchen — direction, shooting, editing, color and sound — and you get a result that looks like it cost a lot more than it did.</p>
+        <p>We pair <b>local shooting in Cyprus</b> with a dedicated post-production team, which means cinematic quality, predictable turnarounds, and a single person who actually answers your messages.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><div class="v">Concept → Cut</div><div class="l">Fully managed production</div></div>
+        <div class="fact"><div class="v">Cyprus</div><div class="l">Local crew, on the ground</div></div>
+        <div class="fact"><div class="v">Studio-grade</div><div class="l">Dedicated post-production team</div></div>
+        <div class="fact"><div class="v">One contact</div><div class="l">No agency runaround</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap contact-inner">
+    <div class="reveal">
+      <span class="eyebrow">06 — Let's roll</span>
+      <h2>Got footage<br>or a story?</h2>
+      <p>Tell us what you're making. We'll come back with a plan and a quote — usually within a day.</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="row"><span class="k">EMAIL</span><a href="mailto:hello@heisenburg.example?subject=New%20project%20enquiry">hello@heisenburg.example</a></div>
+      <div class="row"><span class="k">PHONE</span><a href="tel:+357">+357 · your number</a></div>
+      <div class="row"><span class="k">BASED</span><span>Cyprus · working worldwide</span></div>
+      <div class="row"><span class="k">SOCIAL</span><span>@heisenburg</span></div>
+      <a class="btn" href="mailto:hello@heisenburg.example?subject=New%20project%20enquiry">Start a project →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span class="mono">© 2026 HEISENBURG PRODUCTION HOUSE</span>
+    <span class="mono">We cook videos.</span>
+    <div class="foot-soc">
+      <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Vimeo</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  const toggle=document.getElementById('toggle'),menu=document.getElementById('menu');
+  toggle.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+  // scroll reveals
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // running timecode in hero (24fps feel)
+  const tc=document.getElementById('tc');
+  if(tc && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    let f=0;
+    setInterval(()=>{
+      f++;
+      const fr=f%24, s=Math.floor(f/24)%60, m=Math.floor(f/1440)%60, h=Math.floor(f/86400)%24;
+      const p=n=>String(n).padStart(2,'0');
+      tc.textContent=`${p(h)}:${p(m)}:${p(s)}:${p(fr)}`;
+    },1000/24);
+  }
+</script>
+</body>
+</html>

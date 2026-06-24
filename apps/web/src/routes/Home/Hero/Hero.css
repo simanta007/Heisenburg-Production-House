@@ -1,0 +1,127 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 60px;
+  background: radial-gradient(
+      120% 80% at 80% 0%,
+      rgba(240, 131, 60, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      110% 90% at 0% 100%,
+      rgba(44, 111, 105, 0.2),
+      transparent 55%
+    ),
+    var(--bg);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 46px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero::before {
+  top: 0;
+  background: linear-gradient(var(--bg), transparent);
+}
+
+.hero::after {
+  bottom: 0;
+  background: linear-gradient(transparent, var(--bg));
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  width: 100%;
+}
+
+.slate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  color: var(--faint);
+  font-size: 12px;
+}
+
+.slate .tc {
+  color: var(--teal-glow);
+}
+
+h1.title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: clamp(54px, 12vw, 150px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 6px 0 4px;
+}
+
+h1.title .em {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ember);
+  position: relative;
+}
+
+.lede {
+  max-width: 600px;
+  color: var(--muted);
+  font-size: clamp(16px, 2.2vw, 20px);
+  margin-top: 6px;
+}
+
+.lede b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.corner-tc {
+  position: absolute;
+  right: 28px;
+  bottom: 26px;
+  z-index: 3;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  color: var(--faint);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.corner-tc .rd {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e0413a;
+  box-shadow: 0 0 10px #e0413a;
+  animation: rec-red 1.4s steps(1, end) infinite;
+}
+
+@keyframes rec-red {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (max-width: 860px) {
+  .corner-tc {
+    display: none;
+  }
+}

@@ -1,0 +1,41 @@
+.strip {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.strip-track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  padding: 16px 0;
+  width: max-content;
+  animation: slide 32s linear infinite;
+}
+
+.strip-track span {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: var(--faint);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.strip-track span::after {
+  content: "●";
+  color: var(--ember);
+  font-size: 9px;
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
