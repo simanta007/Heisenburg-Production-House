@@ -11,8 +11,10 @@ const SERVICE_LABELS: Record<ServiceTypeValue, string> = {
   "ai-automation": "AI Automation",
 };
 
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
+
 async function submitContact(payload: ContactPayload) {
-  const res = await fetch("/api/contact", {
+  const res = await fetch(`${API_BASE}/api/contact`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
