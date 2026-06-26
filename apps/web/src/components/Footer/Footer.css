@@ -1,5 +1,5 @@
 footer {
-  padding: 40px 0;
+  padding: 64px 0;
   border-top: 1px solid var(--line);
   position: relative;
   z-index: 2;
@@ -12,23 +12,37 @@ footer {
   gap: 18px;
   flex-wrap: wrap;
   color: var(--faint);
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
 }
 
 .foot .mono {
   color: var(--faint);
 }
 
+.foot-tagline {
+  opacity: 0.5;
+}
+
 .foot-soc {
   display: flex;
-  gap: 18px;
+  gap: 24px;
 }
 
-.foot-soc a {
+.foot-soc-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   color: var(--muted);
   transition: color 0.25s;
+  text-decoration: none;
 }
 
-.foot-soc a:hover {
+.foot-soc-link:hover {
   color: var(--ember);
+}
+
+.foot-soc-link svg {
+  flex-shrink: 0;
+  opacity: 0.8;
 }
