@@ -7,7 +7,7 @@
     "dev": "tsx watch --env-file=.env src/index.ts | pino-pretty --colorize",
     "build": "tsc",
     "start": "node dist/index.js",
-    "migrate": "node-pg-migrate -d $DATABASE_URL up",
+    "migrate": "node --env-file=.env node_modules/node-pg-migrate/bin/node-pg-migrate.js up",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

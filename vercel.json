@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pnpm turbo run build",
+  "outputDirectory": "apps/web/dist",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index" }
+  ]
+}
