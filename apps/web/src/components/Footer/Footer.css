@@ -24,6 +24,12 @@ footer {
   opacity: 0.5;
 }
 
+@media (max-width: 600px) {
+  .foot-tagline {
+    display: none;
+  }
+}
+
 .foot-soc {
   display: flex;
   gap: 24px;
