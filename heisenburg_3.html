@@ -9,17 +9,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#100D0B;          /* warm near-black */
-    --bg-2:#161210;        /* lifted surface */
-    --surface:#1C1714;     /* cards */
-    --line:#2A2320;        /* hairlines */
-    --ink:#F3ECE3;         /* warm off-white */
-    --muted:#9A8E83;       /* warm grey */
-    --faint:#6B6259;
-    --ember:#F0833C;       /* tungsten / heat accent */
-    --ember-deep:#C9621F;
-    --teal:#2C6F69;        /* shadow grade */
-    --teal-glow:#3E8F87;
+    --bg:#07080F;          /* deep midnight navy */
+    --bg-2:#0C0E1A;        /* lifted surface */
+    --surface:#111428;     /* cards */
+    --line:#1C1F38;        /* hairlines */
+    --ink:#F0ECE8;         /* warm cream white */
+    --muted:#8B90AA;       /* lavender-grey */
+    --faint:#4D5270;
+    --ember:#C9A55A;       /* champagne gold accent */
+    --ember-deep:#9E7C38;
+    --teal:#6B44A8;        /* amethyst violet */
+    --teal-glow:#A47FD4;
     --maxw:1180px;
   }
 
@@ -55,7 +55,7 @@
     position:fixed;top:0;left:0;right:0;z-index:50;
     display:flex;align-items:center;justify-content:space-between;
     padding:18px 28px;
-    background:linear-gradient(to bottom,rgba(16,13,11,.92),rgba(16,13,11,0));
+    background:linear-gradient(to bottom,rgba(7,8,15,.92),rgba(7,8,15,0));
     backdrop-filter:blur(6px);
   }
   .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque';font-weight:800;font-size:18px;letter-spacing:-.01em}
@@ -71,7 +71,7 @@
     color:var(--bg);background:var(--ember);font-weight:700;
     transition:transform .2s ease,box-shadow .25s ease,background .2s;
   }
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(240,131,60,.35)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,165,90,.35)}
   .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
   .btn.ghost:hover{border-color:var(--ember);color:var(--ember);box-shadow:none}
   .nav-toggle{display:none;background:none;border:0;color:var(--ink);font-size:24px;cursor:pointer}
@@ -81,8 +81,8 @@
     position:relative;min-height:100svh;display:flex;align-items:center;
     padding:120px 0 60px;
     background:
-      radial-gradient(120% 80% at 80% 0%,rgba(240,131,60,.16),transparent 55%),
-      radial-gradient(110% 90% at 0% 100%,rgba(44,111,105,.20),transparent 55%),
+      radial-gradient(120% 80% at 80% 0%,rgba(201,165,90,.16),transparent 55%),
+      radial-gradient(110% 90% at 0% 100%,rgba(107,68,168,.20),transparent 55%),
       var(--bg);
   }
   .hero::before,.hero::after{content:"";position:absolute;left:0;right:0;height:46px;z-index:2;pointer-events:none}
@@ -132,7 +132,7 @@
   }
   .track::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--ember),var(--ember-deep))}
   .track:nth-child(2)::before{background:linear-gradient(90deg,var(--teal-glow),var(--teal))}
-  .track:hover{transform:translateY(-5px);border-color:#3a302b}
+  .track:hover{transform:translateY(-5px);border-color:#2a2d52}
   .track .tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg);background:var(--ember);padding:4px 9px;border-radius:2px;font-weight:700}
   .track:nth-child(2) .tag{background:var(--teal-glow)}
   .track h3{font-family:'Bricolage Grotesque';font-weight:800;font-size:30px;letter-spacing:-.02em;margin:20px 0 10px}
@@ -173,8 +173,8 @@
     aspect-ratio:4/5;border:1px solid var(--line);border-radius:4px;overflow:hidden;
     position:relative;display:flex;align-items:flex-end;
     background:
-      radial-gradient(120% 70% at 70% 10%,rgba(240,131,60,.13),transparent 60%),
-      radial-gradient(120% 80% at 10% 100%,rgba(44,111,105,.18),transparent 60%),
+      radial-gradient(120% 70% at 70% 10%,rgba(201,165,90,.13),transparent 60%),
+      radial-gradient(120% 80% at 10% 100%,rgba(107,68,168,.18),transparent 60%),
       var(--bg-2);
     transition:transform .3s ease;
   }
@@ -197,7 +197,7 @@
   /* contact */
   .contact{
     background:
-      radial-gradient(110% 120% at 100% 0%,rgba(240,131,60,.14),transparent 55%),
+      radial-gradient(110% 120% at 100% 0%,rgba(201,165,90,.14),transparent 55%),
       var(--bg-2);
     border-top:1px solid var(--line);
   }
