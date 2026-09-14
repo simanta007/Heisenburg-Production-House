@@ -16,6 +16,9 @@ testimonials, fixed pricing).
 | `index.html` | The entire live site |
 | `sw.js`, `registerSW.js` | Kill the service worker left by the previous Vite PWA build |
 | `vercel.json` | Static deploy config + cache headers |
+| `favicon.svg`, `apple-touch-icon.png` | Site icon — the green badge with the yellow H |
+| `og-image.png` | 1200×630 social share card |
+| `assets/` | Standalone logo files for decks, invoices, email signatures |
 | `archive/` | The superseded earlier landing page |
 | `apps/`, `packages/`, `api/` | Earlier monorepo app — **not** part of the current deploy |
 
@@ -34,3 +37,25 @@ Then open http://localhost:8000/.
 tablet landscape, `900` tablet portrait, `767` mobile, `400` small mobile,
 plus a short-landscape rule. Navigation collapses to a hamburger drawer
 below 960 px.
+
+## Logo
+
+The lockup is **vector outlines, not live text** — it needs no webfont and cannot
+reflow or substitute. It was drawn from the supplied brand logo; the letterforms
+are outlined Nunito ExtraBold, the closest match to the original artwork.
+
+| File | Use |
+|---|---|
+| `assets/logo.svg` | Dark wordmark, for light backgrounds |
+| `assets/logo-light.svg` | Cream wordmark, for dark backgrounds |
+| `assets/logo-mark.svg` | Square badge (yellow H on green) — avatars, app icons |
+
+In `index.html` the lockup is defined **once** as an inline `<symbol id="brand">`
+and referenced twice (nav and footer). The wordmark uses `currentColor`, so the
+same asset renders dark-on-cream in the nav and cream-on-green in the footer —
+set `color` on `.logo .brand` to retheme it.
+
+**Brand accent:** the H and the trailing dot use `--brand-yellow` (`#FDC50A`),
+defined in `:root`. This is the logo's own yellow and is deliberately brighter
+than the site's `--gold` (`#C0912E`) used for UI accents. Change the one token to
+retune the logo without touching anything else.
