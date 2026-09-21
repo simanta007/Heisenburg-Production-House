@@ -211,6 +211,52 @@ footer .logo .brand{height:44px;color:var(--cream)}
 .work p{color:var(--muted);font-size:14.2px;line-height:1.58;flex:1;margin-bottom:14px}
 .work .go{font-size:13.5px;font-weight:600;color:var(--green2);letter-spacing:.02em}
 
+/* VIDEO TRIGGERS + LIGHTBOX */
+.vplay{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;
+  font:inherit;color:inherit;text-align:inherit;position:relative}
+.vthumb{position:absolute;inset:0;background-size:cover;background-position:center;
+  border-radius:inherit}
+.vthumb::after{content:"";position:absolute;inset:0;background:rgba(18,41,30,.42);
+  border-radius:inherit;transition:background .25s}
+.vplay:hover .vthumb::after{background:rgba(18,41,30,.22)}
+.vplay .play{transition:transform .25s ease,background .25s}
+.vplay:hover .play{transform:scale(1.09);background:rgba(245,241,232,.16)}
+.vplay:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.lb[hidden]{display:none!important}
+.lb{position:fixed;inset:0;z-index:200;display:flex;align-items:center;
+  justify-content:center;padding:clamp(12px,3vw,36px)}
+.lb-back{position:absolute;inset:0;background:rgba(7,18,13,.88);backdrop-filter:blur(7px);
+  animation:lbf .22s ease}
+@keyframes lbf{from{opacity:0}}
+.lb-box{position:relative;width:100%;max-width:1060px;animation:lbu .28s cubic-bezier(.2,.9,.3,1)}
+@keyframes lbu{from{opacity:0;transform:translateY(14px) scale(.985)}}
+.lb-head{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:12px;flex-wrap:wrap}
+.lb-t{font-family:"Playfair Display",Georgia,serif;font-weight:600;color:var(--cream);
+  font-size:clamp(1rem,2.2vw,1.3rem);line-height:1.25}
+.lb-act{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.lb-ext{font-family:var(--ui);font-size:11.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--green);background:var(--gold);
+  padding:9px 15px;border-radius:7px;transition:background .2s}
+.lb-ext:hover{background:var(--gold-l)}
+.lb-x{width:40px;height:40px;flex-shrink:0;border-radius:8px;cursor:pointer;
+  border:1px solid rgba(245,241,232,.3);background:rgba(245,241,232,.08);
+  color:var(--cream);font-size:22px;line-height:1;transition:background .2s}
+.lb-x:hover{background:rgba(245,241,232,.2)}
+.lb-frame{position:relative;aspect-ratio:16/9;width:100%;background:#0C1B14;
+  border:1px solid rgba(245,241,232,.16);border-radius:10px;overflow:hidden}
+.lb-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lb-note{margin-top:11px;font-size:12.5px;color:rgba(245,241,232,.55);text-align:center}
+.lb-note a{color:var(--gold-l);font-weight:600}
+body.lb-open{overflow:hidden}
+@media(max-width:600px){
+  .lb{padding:10px}
+  .lb-head{margin-bottom:9px;gap:10px}
+  .lb-ext{font-size:10.5px;padding:8px 12px;letter-spacing:.1em}
+}
+
 /* PRICING */
 .price{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:30px 26px;display:flex;flex-direction:column}
 .price.feat2{border-color:var(--green);border-width:1.5px;background:linear-gradient(180deg,var(--panel),var(--white) 55%)}
@@ -440,11 +486,15 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
         <p>An ongoing studio partnership handling cinematic wedding edits, colour grading and final delivery — built to Oscar Production's own studio spec and turnaround, under their name, never ours.</p>
         <a href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V?usp=drive_link" target="_blank" rel="noopener" class="btn btn-green">View the full work</a>
       </div>
-      <a class="reel" href="https://drive.google.com/drive/folders/14DXBwnwT7odar1Af_ybQHur_LITrsytm" target="_blank" rel="noopener">
+      <button type="button" class="reel vplay" data-video="1-ibw49mzqaTY8GgX4OLn4HqH313o43kP"
+        data-vtitle="Hassan &amp; Zahraa — Featured Wedding Film"
+        data-vhref="https://drive.google.com/drive/folders/14DXBwnwT7odar1Af_ybQHur_LITrsytm">
+        <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1-ibw49mzqaTY8GgX4OLn4HqH313o43kP&amp;sz=w1200')"></span>
         <span class="lbl">Featured highlight</span>
         <span class="play">▶</span>
         <span class="cap">Hassan &amp; Zahraa — Featured Wedding Film</span>
-      </a>
+        <span class="sr">Play the film</span>
+      </button>
     </div>
   </div>
 </section>
@@ -524,21 +574,21 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
       <p class="lead">Each of these was cut to a different studio's specification. That's the point — none of them look like us.</p>
     </div>
     <div class="grid g3">
-      <a class="work" href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V?usp=drive_link" target="_blank" rel="noopener">
-        <div class="top"><span class="play">▶</span></div>
+      <article class="work">
+        <button type="button" class="top vplay" data-video="195-FF71zuobgyAdW_qvSQF8dTv9HUhPn" data-vtitle="Oscar Production — Rob &amp; Rana Highlight" data-vhref="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V"><span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=195-FF71zuobgyAdW_qvSQF8dTv9HUhPn&amp;sz=w1200')"></span><span class="play">▶</span><span class="sr">Play Oscar Production — Rob &amp; Rana Highlight</span></button>
         <div class="m"><span class="st">Studio partner · USA</span><h3>Oscar Production</h3><div class="loc">Detroit</div>
-        <p>Ongoing partnership — cinematic wedding edits, colour grading and final delivery to studio spec.</p><span class="go">View work →</span></div>
-      </a>
-      <a class="work" href="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup?usp=drive_link" target="_blank" rel="noopener">
-        <div class="top"><span class="play">▶</span></div>
+        <p>Ongoing partnership — cinematic wedding edits, colour grading and final delivery to studio spec.</p><a class="go" href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V" target="_blank" rel="noopener">View all work ↗</a></div>
+      </article>
+      <article class="work">
+        <button type="button" class="top vplay" data-video="1ohUQxuKl-iu-6oj57cvqDkL63QcAZMJR" data-vtitle="Bamm Production — Highlight Film" data-vhref="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup"><span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1ohUQxuKl-iu-6oj57cvqDkL63QcAZMJR&amp;sz=w1200')"></span><span class="play">▶</span><span class="sr">Play Bamm Production — Highlight Film</span></button>
         <div class="m"><span class="st">Studio partner · USA</span><h3>Bamm Production</h3><div class="loc">Florida</div>
-        <p>Ongoing post-production — feature and highlight films edited to studio spec.</p><span class="go">View work →</span></div>
-      </a>
-      <a class="work" href="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ?usp=drive_link" target="_blank" rel="noopener">
-        <div class="top"><span class="play">▶</span></div>
+        <p>Ongoing post-production — feature and highlight films edited to studio spec.</p><a class="go" href="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup" target="_blank" rel="noopener">View all work ↗</a></div>
+      </article>
+      <article class="work">
+        <button type="button" class="top vplay" data-video="11fJBrbajEgscjYR-ui4utKFGvnU6l_l_" data-vtitle="Haris &amp; Myra — South Asian Highlight" data-vhref="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ"><span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=11fJBrbajEgscjYR-ui4utKFGvnU6l_l_&amp;sz=w1200')"></span><span class="play">▶</span><span class="sr">Play Haris &amp; Myra — South Asian Highlight</span></button>
         <div class="m"><span class="st">Recent · South Asian</span><h3>Wedding Collection</h3><div class="loc">Multi-day</div>
-        <p>Multi-day celebrations cut into cohesive, colour-rich cinematic films — mehndi through vidaai.</p><span class="go">View collection →</span></div>
-      </a>
+        <p>Multi-day celebrations cut into cohesive, colour-rich cinematic films — mehndi through vidaai.</p><a class="go" href="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ" target="_blank" rel="noopener">View collection ↗</a></div>
+      </article>
     </div>
     <div style="text-align:center;margin-top:34px">
       <a href="https://drive.google.com/drive/folders/1Gdiizpc2YekrQEFxg4Ed1BQ59jfP8O--?usp=drive_link" target="_blank" rel="noopener" class="btn btn-out">View the full portfolio — features, highlights, teasers &amp; social edits</a>
@@ -744,5 +794,75 @@ if('serviceWorker' in navigator){
   if(window.caches&&caches.keys){caches.keys().then(ks=>ks.forEach(k=>caches.delete(k))).catch(()=>{});}
 }
 </script>
+
+<!-- video lightbox: plays the Drive file inline, with an escape hatch to Drive itself -->
+<div class="lb" id="lightbox" hidden>
+  <div class="lb-back" data-close></div>
+  <div class="lb-box" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+    <div class="lb-head">
+      <span class="lb-t" id="lb-title"></span>
+      <div class="lb-act">
+        <a class="lb-ext" id="lb-ext" target="_blank" rel="noopener">Open in Drive &#8599;</a>
+        <button type="button" class="lb-x" data-close aria-label="Close video">&times;</button>
+      </div>
+    </div>
+    <div class="lb-frame">
+      <iframe id="lb-frame" title="Video player" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+    <p class="lb-note">Trouble playing? <a id="lb-note-link" target="_blank" rel="noopener">Watch it on Google Drive</a>.</p>
+  </div>
+</div>
+
+<script>
+// Video lightbox. Each trigger carries the Drive file id, a title, and the
+// folder to fall back to, so the markup stays the single source of truth.
+(function(){
+  var lb=document.getElementById('lightbox');
+  if(!lb) return;
+  var frame=document.getElementById('lb-frame'),
+      titleEl=document.getElementById('lb-title'),
+      ext=document.getElementById('lb-ext'),
+      noteLink=document.getElementById('lb-note-link'),
+      last=null;
+
+  function open(btn){
+    var id=btn.getAttribute('data-video'),
+        title=btn.getAttribute('data-vtitle')||'',
+        href=btn.getAttribute('data-vhref')||('https://drive.google.com/file/d/'+id+'/view');
+    if(!id) return;
+    last=btn;
+    titleEl.textContent=title;
+    ext.href=href; noteLink.href='https://drive.google.com/file/d/'+id+'/view';
+    frame.src='https://drive.google.com/file/d/'+id+'/preview';
+    lb.hidden=false;
+    document.body.classList.add('lb-open');
+    lb.querySelector('.lb-x').focus();
+  }
+  function close(){
+    if(lb.hidden) return;
+    lb.hidden=true;
+    frame.src='about:blank';             // stop playback ('' would reload this page into the frame)
+    document.body.classList.remove('lb-open');
+    if(last){ last.focus(); last=null; }
+  }
+
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('.vplay');
+    if(t){ e.preventDefault(); open(t); return; }
+    if(e.target.closest('[data-close]')) close();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') close();
+    if(e.key==='Tab'&&!lb.hidden){        // keep focus inside the dialog
+      var f=lb.querySelectorAll('a[href],button');
+      if(!f.length) return;
+      var first=f[0], lastf=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();lastf.focus();}
+      else if(!e.shiftKey&&document.activeElement===lastf){e.preventDefault();first.focus();}
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
