@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Heisenburg Production House",
 "description":"Wedding film post-production for videographers and studios in the USA and UK.",
@@ -54,11 +54,12 @@ h1{font-size:clamp(2.6rem,6vw,4.5rem)}
 h2{font-size:clamp(2rem,4.2vw,3.1rem)}
 h3{font-size:1.35rem;font-weight:600}
 em.i{font-style:italic;font-weight:600;color:var(--green2)}
+.movie{font-style:normal;font-weight:800;text-transform:uppercase;color:var(--green);letter-spacing:.005em}
 .eyebrow{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;display:block}
 
 /* Outfit carries every small-caps label, so the micro-typography reads as
    one deliberate system against the Playfair headings and Inter body. */
-.eyebrow,.tagpill,.reel .lbl,.step .t,.badge,.row .k,.work .st,.price .tag,
+.eyebrow,.step .t,.badge,.row .k,.work .st,.price .tag,
 .specs .k,.cline .k,label,.f-grid h4,.doc-h,.logo .s{font-family:var(--ui)}
 .lead{font-size:clamp(1.04rem,1.6vw,1.2rem);color:var(--muted);line-height:1.72;max-width:64ch}
 section{padding:var(--sec-y) 0;position:relative}
@@ -139,22 +140,31 @@ footer .logo .brand{height:44px;color:var(--cream)}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
 /* GUARANTEE */
-.gbar{background:var(--green);color:var(--cream);padding:28px 0;text-align:center}
-.gbar strong{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(1.1rem,2.2vw,1.5rem);display:block;margin-bottom:7px}
-.gbar span{font-size:15px;color:rgba(245,241,232,.72)}
-
-/* FEATURED PARTNER */
-.feat{background:var(--panel);border:1px solid rgba(28,59,44,.18);border-radius:16px;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
-@media(max-width:860px){.feat{grid-template-columns:1fr;padding:28px 24px}}
-.tagpill{display:inline-block;background:var(--green);color:var(--cream);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:6px 13px;border-radius:100px;margin-bottom:18px}
-.feat h3{font-size:1.85rem;margin-bottom:6px}
-.feat .loc{font-family:"Playfair Display",serif;font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:14px}
-.feat p{color:#3D4A41;font-size:15.5px;margin-bottom:22px}
-.reel{background:linear-gradient(150deg,#12291E,#1C3B2C);border:1.5px solid var(--gold);border-radius:12px;aspect-ratio:16/10;display:grid;place-items:center;position:relative;overflow:hidden;transition:.2s}
-.reel:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(28,59,44,.28)}
-.reel .lbl{position:absolute;top:14px;left:16px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600}
-.reel .cap{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:13px;color:rgba(245,241,232,.85)}
-.reel .play{width:58px;height:58px;border-radius:50%;border:2px solid rgba(245,241,232,.85);display:grid;place-items:center;color:var(--cream);font-size:17px;padding-left:4px}
+/* FEATURED REEL — cinematic frame from the film itself, minimal overlay */
+.reel{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;
+  border-radius:14px;border:1px solid rgba(28,59,44,.25);
+  background:linear-gradient(150deg,#12291E,#1C3B2C);
+  transition:transform .3s ease,box-shadow .3s ease}
+.reel:hover{transform:translateY(-3px);box-shadow:0 22px 56px rgba(28,59,44,.3)}
+.reel .vthumb::after{background:linear-gradient(180deg,rgba(10,24,17,.5),rgba(10,24,17,.3) 42%,rgba(10,24,17,.72))}
+.reel:hover .vthumb::after{background:linear-gradient(180deg,rgba(10,24,17,.38),rgba(10,24,17,.18) 42%,rgba(10,24,17,.62))}
+.reel-in{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:clamp(14px,2.4vw,22px);padding:24px}
+.reel-name{font-family:var(--ui);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.25rem,4.4vw,3.1rem);letter-spacing:.16em;line-height:1.05;
+  color:var(--cream);text-indent:.16em;text-shadow:0 2px 26px rgba(0,0,0,.45)}
+.reel .play{width:clamp(50px,6vw,68px);height:clamp(50px,6vw,68px);border-radius:50%;
+  border:1.5px solid rgba(245,241,232,.8);display:grid;place-items:center;
+  color:var(--cream);font-size:clamp(14px,1.5vw,19px);padding-left:4px}
+.reel-tag{position:absolute;left:0;right:0;bottom:clamp(14px,2.2vw,22px);text-align:center;
+  font-family:var(--ui);font-size:clamp(9px,1.1vw,11.5px);font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold-l);text-indent:.22em}
+.reel-foot{display:flex;align-items:center;justify-content:space-between;gap:28px;
+  margin-top:26px;flex-wrap:wrap}
+.reel-foot p{color:var(--muted);font-size:15.5px;max-width:64ch;margin:0}
+.reel-foot p b{color:var(--green2);font-weight:600}
+.reel-foot .btn{flex-shrink:0}
+@media(max-width:600px){.reel-foot{margin-top:20px;gap:18px}.reel-foot .btn{width:100%}}
 
 /* GRIDS */
 .grid{display:grid;gap:20px}
@@ -328,7 +338,6 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
 @media(max-width:1199px){
   .g4{grid-template-columns:repeat(3,1fr)}
   .sig{gap:38px}
-  .feat{padding:32px;gap:30px}
 }
 
 /* tablet landscape */
@@ -345,7 +354,6 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
   .g4{grid-template-columns:repeat(2,1fr)}
   .card{padding:24px 21px}
   .price{padding:26px 22px}
-  .feat h3{font-size:1.6rem}
 }
 
 /* mobile */
@@ -362,13 +370,10 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
   .trust{gap:8px}
   .chip{font-size:12.6px;padding:7px 13px}
   .sec-head{margin-bottom:36px}
-  .gbar{padding:24px 0}
   .card{padding:22px 19px}
   .work .m{padding:18px 19px}
   .price{padding:26px 21px}
   .price .amt{font-size:2.2rem}
-  .feat{padding:26px 21px;gap:24px}
-  .reel .play{width:50px;height:50px;font-size:15px}
   .doc-b{padding:4px 16px 12px}
   .row{font-size:13.8px;padding:12px 0}
   .bar{width:74px}
@@ -392,7 +397,6 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
   .chip{font-size:12px;padding:6px 11px}
   .price .amt{font-size:2rem}
   .price .amt small{font-size:.8rem}
-  .feat{padding:22px 17px}
   .cta{padding:34px 18px}
   .btn{font-size:14.5px;padding:13px 18px}
   .step{padding:20px 16px}
@@ -449,52 +453,37 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
 <header class="hero" id="top">
   <div class="wrap">
     <span class="eyebrow">Wedding film editing for USA &amp; UK studios</span>
-    <h1>Wedding films, edited to feel like <em class="i">the day itself.</em></h1>
-    <p class="lead">Story-driven cinematic editing for videographers and studios — vibrant, true-to-life colour, clean audio, delivered ready for your clients. An in-house editing team already trusted by production studios across the USA, now taking on new USA &amp; UK partners.</p>
+    <h1>Wedding films edited to feel like a <em class="movie">movie</em>.</h1>
+    <p class="lead">Memorable storytelling, love, and emotions. We keep it exclusive. With 15 in-house editors, you will never miss a deadline.</p>
     <div class="hero-cta">
       <a href="https://calendly.com/heisenburgproductionhouse" target="_blank" rel="noopener" class="btn btn-green">Book a 20-minute call</a>
       <a href="https://wa.me/35794108072" target="_blank" rel="noopener" class="btn btn-out">WhatsApp us</a>
-      <a href="#work" class="btn btn-out">See the work</a>
-    </div>
-    <div class="trust">
-      <span class="chip"><span class="dot"></span><b>10-day</b> standard turnaround</span>
-      <span class="chip"><span class="dot"></span>Your <b>Signature Profile</b> before we cut</span>
-      <span class="chip"><span class="dot"></span>Pay <b>only if you deliver it</b></span>
-      <span class="chip"><span class="dot"></span>Premiere Pro &amp; <b>DaVinci Resolve</b></span>
+      <a href="#partner" class="btn btn-out">See the work</a>
     </div>
   </div>
 </header>
 
-<div class="gbar">
-  <div class="wrap">
-    <strong>Send us one wedding. If you don't deliver our cut to your couple, you don't pay.</strong>
-    <span>No deposit. No contract. You keep the files either way.</span>
-  </div>
-</div>
-
 <section id="partner">
   <div class="wrap">
-    <div class="sec-head" style="margin-bottom:34px">
-      <span class="eyebrow">Studio partnership</span>
-      <h2>Already cutting for studios in the States.</h2>
+    <div class="sec-head" style="margin-bottom:30px">
+      <h2>See our work.</h2>
     </div>
-    <div class="feat">
-      <div>
-        <span class="tagpill">Featured USA partner</span>
-        <h3>Oscar Production</h3>
-        <div class="loc">Detroit, USA</div>
-        <p>An ongoing studio partnership handling cinematic wedding edits, colour grading and final delivery — built to Oscar Production's own studio spec and turnaround, under their name, never ours.</p>
-        <a href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V?usp=drive_link" target="_blank" rel="noopener" class="btn btn-green">View the full work</a>
-      </div>
-      <button type="button" class="reel vplay" data-video="1-ibw49mzqaTY8GgX4OLn4HqH313o43kP"
-        data-vtitle="Hassan &amp; Zahraa — Featured Wedding Film"
-        data-vhref="https://drive.google.com/drive/folders/14DXBwnwT7odar1Af_ybQHur_LITrsytm">
-        <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1-ibw49mzqaTY8GgX4OLn4HqH313o43kP&amp;sz=w1200')"></span>
-        <span class="lbl">Featured highlight</span>
-        <span class="play">▶</span>
-        <span class="cap">Hassan &amp; Zahraa — Featured Wedding Film</span>
-        <span class="sr">Play the film</span>
-      </button>
+
+    <button type="button" class="reel vplay" data-video="1-ibw49mzqaTY8GgX4OLn4HqH313o43kP"
+      data-vtitle="Oscar Production — Featured Wedding Film"
+      data-vhref="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V">
+      <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1-ibw49mzqaTY8GgX4OLn4HqH313o43kP&amp;sz=w1600')"></span>
+      <span class="reel-in">
+        <span class="play">&#9654;</span>
+        <span class="reel-name">Oscar Production</span>
+      </span>
+      <span class="reel-tag">Fast-Paced Upbeat Highlights</span>
+      <span class="sr">Play the Oscar Production highlight film</span>
+    </button>
+
+    <div class="reel-foot">
+      <p><b>Detroit, USA.</b> An ongoing studio partnership — cinematic wedding edits, colour grading and final delivery, built to Oscar Production&#39;s own studio spec and turnaround, under their name, never ours.</p>
+      <a href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V" target="_blank" rel="noopener" class="btn btn-green">View the full work</a>
     </div>
   </div>
 </section>
