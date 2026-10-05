@@ -514,21 +514,21 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
       <h2>See our work.</h2>
     </div>
 
-    <button type="button" class="reel vplay" data-video="1-ibw49mzqaTY8GgX4OLn4HqH313o43kP"
-      data-vtitle="Oscar Production — Featured Wedding Film"
-      data-vhref="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V">
-      <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1-ibw49mzqaTY8GgX4OLn4HqH313o43kP&amp;sz=w1600')"></span>
+    <button type="button" class="reel vplay" data-video="yt:tKbOwG42Y5U"
+      data-vtitle="Mo Films — Cyprus Destination Wedding"
+      data-vhref="https://youtu.be/tKbOwG42Y5U">
+      <span class="vthumb" style="background-image:url('https://img.youtube.com/vi/tKbOwG42Y5U/maxresdefault.jpg')"></span>
       <span class="reel-in">
         <span class="play">&#9654;</span>
-        <span class="reel-name">Oscar Production</span>
+        <span class="reel-name">Mo Films</span>
       </span>
-      <span class="reel-tag">Fast-Paced Upbeat Highlights</span>
-      <span class="sr">Play the Oscar Production highlight film</span>
+      <span class="reel-tag">Partnership · Cyprus, Greece &amp; Europe</span>
+      <span class="sr">Play the Mo Films destination wedding film</span>
     </button>
 
     <div class="reel-foot">
-      <p><b>Detroit, USA.</b> An ongoing studio partnership — cinematic wedding edits, colour grading and final delivery, built to Oscar Production&#39;s own studio spec and turnaround, under their name, never ours.</p>
-      <a href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V" target="_blank" rel="noopener" class="btn btn-green">View the full work</a>
+      <p><b>Cyprus, Greece &amp; Europe.</b> Partnership with Mo Films — destination wedding editor specialising in Cyprus, Greece and European weddings, delivering cinematic films to studio spec.</p>
+      <a href="https://youtu.be/tKbOwG42Y5U" target="_blank" rel="noopener" class="btn btn-green">Watch on YouTube</a>
     </div>
   </div>
 </section>
@@ -983,7 +983,7 @@ if('serviceWorker' in navigator){
     <div class="lb-head">
       <span class="lb-t" id="lb-title"></span>
       <div class="lb-act">
-        <a class="lb-ext" id="lb-ext" target="_blank" rel="noopener">Open in Drive &#8599;</a>
+        <a class="lb-ext" id="lb-ext" target="_blank" rel="noopener">Open externally &#8599;</a>
         <button type="button" class="lb-x" data-close aria-label="Close video">&times;</button>
       </div>
     </div>
@@ -1009,12 +1009,23 @@ if('serviceWorker' in navigator){
   function open(btn){
     var id=btn.getAttribute('data-video'),
         title=btn.getAttribute('data-vtitle')||'',
-        href=btn.getAttribute('data-vhref')||('https://drive.google.com/file/d/'+id+'/view');
+        href=btn.getAttribute('data-vhref')||'';
     if(!id) return;
     last=btn;
     titleEl.textContent=title;
-    ext.href=href; noteLink.href='https://drive.google.com/file/d/'+id+'/view';
-    frame.src='https://drive.google.com/file/d/'+id+'/preview';
+    var isYT=id.indexOf('yt:')=== 0;
+    if(isYT){
+      var ytId=id.slice(3);
+      var ytUrl='https://youtu.be/'+ytId;
+      ext.href=href||ytUrl; noteLink.href=ytUrl;
+      noteLink.textContent='Watch on YouTube';
+      frame.src='https://www.youtube.com/embed/'+ytId+'?autoplay=1&rel=0';
+    } else {
+      ext.href=href||('https://drive.google.com/file/d/'+id+'/view');
+      noteLink.href='https://drive.google.com/file/d/'+id+'/view';
+      noteLink.textContent='Watch it on Google Drive';
+      frame.src='https://drive.google.com/file/d/'+id+'/preview';
+    }
     lb.hidden=false;
     document.body.classList.add('lb-open');
     lb.querySelector('.lb-x').focus();
