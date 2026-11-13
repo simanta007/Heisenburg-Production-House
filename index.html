@@ -752,34 +752,191 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
 </section>
 
 <section id="work" class="alt">
+  <style>
+    /* CATEGORY FILTER TABS */
+    .work-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+    .wtab{font-family:var(--ui);font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+      padding:9px 18px;border-radius:100px;border:1.5px solid var(--line);background:transparent;
+      color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+    .wtab:hover{border-color:var(--yellow);color:var(--ink)}
+    .wtab.active{background:var(--yellow);border-color:var(--yellow);color:var(--yellow-ink)}
+    /* work grid filter animation */
+    .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;transition:opacity .2s}
+    @media(max-width:980px){.work-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:580px){.work-grid{grid-template-columns:1fr}}
+    .work-item{transition:opacity .25s,transform .25s}
+    .work-item.hidden{display:none}
+    /* category badge on card */
+    .work-cat{display:inline-block;font-family:var(--ui);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+      font-weight:700;padding:3px 9px;border-radius:4px;margin-bottom:8px;
+      background:rgba(253,197,10,.14);color:var(--yellow-d);border:1px solid rgba(253,197,10,.3)}
+  </style>
+
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Selected work &amp; partnerships</span>
-      <h2>Different studios. Deliberately different films.</h2>
-      <p class="lead">Each of these was cut to a different studio's specification. That's the point — none of them look like us.</p>
+      <span class="eyebrow">Selected work</span>
+      <h2>One studio. Every format.</h2>
+      <p class="lead">Filter by what you need. Each film was cut to a different brief — that's the point.</p>
     </div>
-    <div class="grid g3">
-      <article class="work">
-        <button type="button" class="top vplay" data-video="195-FF71zuobgyAdW_qvSQF8dTv9HUhPn" data-vtitle="Oscar Production — Rob &amp; Rana Highlight" data-vhref="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V"><span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=195-FF71zuobgyAdW_qvSQF8dTv9HUhPn&amp;sz=w1200')"></span><span class="play">▶</span><span class="sr">Play Oscar Production — Rob &amp; Rana Highlight</span></button>
-        <div class="m"><span class="st">Studio partner · USA</span><h3>Oscar Production</h3><div class="loc">Detroit</div>
-        <p>Ongoing partnership — cinematic wedding edits, colour grading and final delivery to studio spec.</p><a class="go" href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V" target="_blank" rel="noopener">View all work ↗</a></div>
-      </article>
-      <article class="work">
-        <button type="button" class="top vplay" data-video="1ohUQxuKl-iu-6oj57cvqDkL63QcAZMJR" data-vtitle="Bamm Production — Highlight Film" data-vhref="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup"><span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1ohUQxuKl-iu-6oj57cvqDkL63QcAZMJR&amp;sz=w1200')"></span><span class="play">▶</span><span class="sr">Play Bamm Production — Highlight Film</span></button>
-        <div class="m"><span class="st">Studio partner · USA</span><h3>Bamm Production</h3><div class="loc">Florida</div>
-        <p>Ongoing post-production — feature and highlight films edited to studio spec.</p><a class="go" href="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup" target="_blank" rel="noopener">View all work ↗</a></div>
-      </article>
-      <article class="work">
-        <button type="button" class="top vplay" data-video="11fJBrbajEgscjYR-ui4utKFGvnU6l_l_" data-vtitle="Haris &amp; Myra — South Asian Highlight" data-vhref="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ"><span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=11fJBrbajEgscjYR-ui4utKFGvnU6l_l_&amp;sz=w1200')"></span><span class="play">▶</span><span class="sr">Play Haris &amp; Myra — South Asian Highlight</span></button>
-        <div class="m"><span class="st">Recent · South Asian</span><h3>Wedding Collection</h3><div class="loc">Multi-day</div>
-        <p>Multi-day celebrations cut into cohesive, colour-rich cinematic films — mehndi through vidaai.</p><a class="go" href="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ" target="_blank" rel="noopener">View collection ↗</a></div>
-      </article>
+
+    <!-- Filter tabs -->
+    <div class="work-tabs" role="tablist" aria-label="Filter work by category">
+      <button class="wtab active" data-filter="all">All work</button>
+      <button class="wtab" data-filter="highlight">Highlight Film</button>
+      <button class="wtab" data-filter="documentary">Documentary</button>
+      <button class="wtab" data-filter="teaser">Teaser</button>
+      <button class="wtab" data-filter="social">Social Reels</button>
+      <button class="wtab" data-filter="southasian">South Asian</button>
+      <button class="wtab" data-filter="destination">Destination</button>
     </div>
-    <div style="text-align:center;margin-top:34px">
-      <a href="https://drive.google.com/drive/folders/1Gdiizpc2YekrQEFxg4Ed1BQ59jfP8O--?usp=drive_link" target="_blank" rel="noopener" class="btn btn-out">View the full portfolio — features, highlights, teasers &amp; social edits</a>
-      <p style="font-size:13.5px;color:var(--muted-l);margin-top:14px">All work shared with client permission.</p>
+
+    <!-- Work grid -->
+    <div class="work-grid" id="workGrid">
+
+      <!-- Highlight: Oscar Production -->
+      <article class="work work-item" data-cats="highlight">
+        <button type="button" class="top vplay" data-video="195-FF71zuobgyAdW_qvSQF8dTv9HUhPn"
+          data-vtitle="Oscar Production — Rob &amp; Rana Highlight"
+          data-vhref="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V">
+          <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=195-FF71zuobgyAdW_qvSQF8dTv9HUhPn&sz=w1200')"></span>
+          <span class="play">▶</span>
+          <span class="sr">Play Oscar Production highlight</span>
+        </button>
+        <div class="m">
+          <span class="work-cat">Highlight Film</span>
+          <span class="st">Studio partner · USA</span>
+          <h3>Oscar Production</h3>
+          <div class="loc">Detroit, USA</div>
+          <p>Cinematic highlight edited to studio spec — colour grading, pacing and structure all matched to their house style.</p>
+          <a class="go" href="https://drive.google.com/drive/folders/1zi1tdfKCcih1bki36GIjL7Ir_ym6zC2V" target="_blank" rel="noopener">View all work ↗</a>
+        </div>
+      </article>
+
+      <!-- Highlight: Bamm Production -->
+      <article class="work work-item" data-cats="highlight">
+        <button type="button" class="top vplay" data-video="1ohUQxuKl-iu-6oj57cvqDkL63QcAZMJR"
+          data-vtitle="Bamm Production — Highlight Film"
+          data-vhref="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup">
+          <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1ohUQxuKl-iu-6oj57cvqDkL63QcAZMJR&sz=w1200')"></span>
+          <span class="play">▶</span>
+          <span class="sr">Play Bamm Production highlight</span>
+        </button>
+        <div class="m">
+          <span class="work-cat">Highlight Film</span>
+          <span class="st">Studio partner · USA</span>
+          <h3>Bamm Production</h3>
+          <div class="loc">Florida, USA</div>
+          <p>Ongoing post-production partnership — highlights and feature films edited on a rolling retainer.</p>
+          <a class="go" href="https://drive.google.com/drive/folders/17ifbVS78QyWzrbQWE0E_oCn0NMjN_Wup" target="_blank" rel="noopener">View all work ↗</a>
+        </div>
+      </article>
+
+      <!-- Highlight + South Asian: Wedding Collection -->
+      <article class="work work-item" data-cats="highlight southasian">
+        <button type="button" class="top vplay" data-video="11fJBrbajEgscjYR-ui4utKFGvnU6l_l_"
+          data-vtitle="Haris &amp; Myra — South Asian Highlight"
+          data-vhref="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ">
+          <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=11fJBrbajEgscjYR-ui4utKFGvnU6l_l_&sz=w1200')"></span>
+          <span class="play">▶</span>
+          <span class="sr">Play Haris &amp; Myra South Asian highlight</span>
+        </button>
+        <div class="m">
+          <span class="work-cat">Highlight · South Asian</span>
+          <span class="st">Multi-day · South Asian wedding</span>
+          <h3>Haris &amp; Myra</h3>
+          <div class="loc">Multi-day celebration</div>
+          <p>Mehndi through vidaai — multi-day South Asian wedding cut into a cohesive, colour-rich cinematic film.</p>
+          <a class="go" href="https://drive.google.com/drive/folders/1LEOTpE6XC5SWNfhCVnV4DpmtwVWgPhGZ" target="_blank" rel="noopener">View collection ↗</a>
+        </div>
+      </article>
+
+      <!-- Documentary -->
+      <article class="work work-item" data-cats="documentary">
+        <button type="button" class="top vplay" data-video="yt:prFWEdyBZHY"
+          data-vtitle="Documentary Film — Full Feature"
+          data-vhref="https://youtu.be/prFWEdyBZHY">
+          <span class="vthumb" style="background-image:url('https://img.youtube.com/vi/prFWEdyBZHY/maxresdefault.jpg')"></span>
+          <span class="play">▶</span>
+          <span class="sr">Play documentary film example</span>
+        </button>
+        <div class="m">
+          <span class="work-cat">Documentary</span>
+          <span class="st">Full feature · 20–45 min</span>
+          <h3>The Full Story</h3>
+          <div class="loc">Feature documentary edit</div>
+          <p>The whole day told in full — ceremony, speeches, candid moments woven into a complete narrative film.</p>
+        </div>
+      </article>
+
+      <!-- Teaser / Destination -->
+      <article class="work work-item" data-cats="teaser destination">
+        <button type="button" class="top vplay" data-video="yt:e_BLXBETbr8"
+          data-vtitle="Teaser — Destination Wedding"
+          data-vhref="https://youtu.be/e_BLXBETbr8">
+          <span class="vthumb" style="background-image:url('https://img.youtube.com/vi/e_BLXBETbr8/maxresdefault.jpg')"></span>
+          <span class="play">▶</span>
+          <span class="sr">Play teaser destination wedding</span>
+        </button>
+        <div class="m">
+          <span class="work-cat">Teaser · Destination</span>
+          <span class="st">Teaser film · Europe</span>
+          <h3>Destination Teaser</h3>
+          <div class="loc">Cyprus / Europe</div>
+          <p>Fast-paced, moody 3–4 minute teaser designed to spark excitement before the full film is delivered.</p>
+        </div>
+      </article>
+
+      <!-- Social Reels -->
+      <article class="work work-item" data-cats="social">
+        <button type="button" class="top vplay" data-video="1sbNdcL-urGl_zvU7DYoKOyauDl3ZEvyD"
+          data-vtitle="Social Reels — Emma &amp; Jake"
+          data-vhref="https://drive.google.com/file/d/1sbNdcL-urGl_zvU7DYoKOyauDl3ZEvyD/view">
+          <span class="vthumb" style="background-image:url('https://drive.google.com/thumbnail?id=1sbNdcL-urGl_zvU7DYoKOyauDl3ZEvyD&sz=w1200')"></span>
+          <span class="play">▶</span>
+          <span class="sr">Play social reels example</span>
+        </button>
+        <div class="m">
+          <span class="work-cat">Social Reels</span>
+          <span class="st">Vertical · Instagram &amp; TikTok</span>
+          <h3>Emma &amp; Jake — Social Cut</h3>
+          <div class="loc">Creative / Artistic edit</div>
+          <p>Vertical 9:16 social cut — hook-led, music-driven, built to perform on Instagram Reels and TikTok.</p>
+        </div>
+      </article>
+
+    </div><!-- /work-grid -->
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="https://drive.google.com/drive/folders/1Gdiizpc2YekrQEFxg4Ed1BQ59jfP8O--?usp=drive_link" target="_blank" rel="noopener" class="btn btn-out">View the full portfolio ↗</a>
+      <p style="font-size:13px;color:var(--muted-l);margin-top:12px">All work shared with client permission.</p>
     </div>
   </div>
+
+  <script>
+  (function(){
+    var tabs=document.querySelectorAll('.wtab');
+    var items=document.querySelectorAll('.work-item');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click',function(){
+        tabs.forEach(function(t){t.classList.remove('active')});
+        this.classList.add('active');
+        var filter=this.getAttribute('data-filter');
+        items.forEach(function(item){
+          if(filter==='all'){
+            item.classList.remove('hidden');
+          } else {
+            var cats=(item.getAttribute('data-cats')||'').split(' ');
+            if(cats.indexOf(filter)>-1){
+              item.classList.remove('hidden');
+            } else {
+              item.classList.add('hidden');
+            }
+          }
+        });
+      });
+    });
+  })();
+  </script>
 </section>
 
 <section class="dark" id="process">
