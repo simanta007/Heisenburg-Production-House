@@ -1137,14 +1137,14 @@ if('serviceWorker' in navigator){
     <div class="lb-head">
       <span class="lb-t" id="lb-title"></span>
       <div class="lb-act">
-        <a class="lb-ext" id="lb-ext" target="_blank" rel="noopener">Open in Drive &#8599;</a>
+        <a class="lb-ext" id="lb-ext" target="_blank" rel="noopener">Open ↗</a>
         <button type="button" class="lb-x" data-close aria-label="Close video">&times;</button>
       </div>
     </div>
     <div class="lb-frame">
       <iframe id="lb-frame" title="Video player" allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
-    <p class="lb-note">Trouble playing? <a id="lb-note-link" target="_blank" rel="noopener">Watch it on Google Drive</a>.</p>
+    <p class="lb-note">Trouble playing? <a id="lb-note-link" target="_blank" rel="noopener">Watch it directly</a>.</p>
   </div>
 </div>
 
@@ -1163,12 +1163,27 @@ if('serviceWorker' in navigator){
   function open(btn){
     var id=btn.getAttribute('data-video'),
         title=btn.getAttribute('data-vtitle')||'',
-        href=btn.getAttribute('data-vhref')||('https://drive.google.com/file/d/'+id+'/view');
+        href=btn.getAttribute('data-vhref')||'';
     if(!id) return;
     last=btn;
     titleEl.textContent=title;
-    ext.href=href; noteLink.href='https://drive.google.com/file/d/'+id+'/view';
-    frame.src='https://drive.google.com/file/d/'+id+'/preview';
+    var isYT=id.indexOf('yt:'===0)?true:(id.slice(0,3)==='yt:');
+    if(isYT){
+      var ytId=id.slice(3);
+      var ytUrl='https://youtu.be/'+ytId;
+      ext.textContent='Open on YouTube ↗';
+      ext.href=href||ytUrl;
+      noteLink.href=href||ytUrl;
+      noteLink.closest('p').querySelector('a').textContent='Watch it on YouTube';
+      frame.src='https://www.youtube.com/embed/'+ytId+'?autoplay=1&rel=0';
+    } else {
+      var driveUrl='https://drive.google.com/file/d/'+id+'/view';
+      ext.textContent='Open in Drive ↗';
+      ext.href=href||driveUrl;
+      noteLink.href=driveUrl;
+      noteLink.closest('p').querySelector('a').textContent='Watch it on Google Drive';
+      frame.src='https://drive.google.com/file/d/'+id+'/preview';
+    }
     lb.hidden=false;
     document.body.classList.add('lb-open');
     lb.querySelector('.lb-x').focus();
