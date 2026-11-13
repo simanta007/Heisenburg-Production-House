@@ -1167,7 +1167,7 @@ if('serviceWorker' in navigator){
     if(!id) return;
     last=btn;
     titleEl.textContent=title;
-    var isYT=id.indexOf('yt:'===0)?true:(id.slice(0,3)==='yt:');
+    var isYT=id.slice(0,3)==='yt:';
     if(isYT){
       var ytId=id.slice(3);
       var ytUrl='https://youtu.be/'+ytId;
