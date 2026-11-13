@@ -41,7 +41,7 @@
   --tagfont:"Space Grotesk","Outfit",Inter,sans-serif;
   --gut:clamp(18px,4.2vw,26px);
   --nav-h:92px;
-  --sec-y:clamp(58px,8.5vw,100px);
+  --sec-y:clamp(40px,5.5vw,64px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);-webkit-text-size-adjust:100%}
@@ -459,6 +459,21 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<style>
+/* section rhythm: 8px scale, see spacing audit */
+.hero{padding-bottom:32px}
+.sec-head{margin-bottom:40px}
+#why,#process{padding-top:0}
+#why>.wrap::before,#process>.wrap::before{content:"";display:block;height:1px;margin-bottom:16px}
+#why>.wrap::before{background:var(--line)}
+#process>.wrap::before{background:var(--line-g)}
+footer{padding-top:32px}
+@media(max-width:640px){
+  .hero{padding-bottom:16px}
+  .sec-head{margin-bottom:28px}
+  footer{padding-top:24px}
+}
+</style>
 </head>
 <body>
 
@@ -524,7 +539,9 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
     @media(max-width:980px){.work-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:580px){.work-grid{grid-template-columns:1fr}}
     .work-item{transition:opacity .25s,transform .25s}
-    .work-item.hidden{display:none}
+    .work-item.hidden,.work-item.capped{display:none}
+    .work-more{display:none;text-align:center;margin-top:28px}
+    .work-more.show{display:block}
     /* category badge on card */
     .work-cat{display:inline-block;font-family:var(--ui);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
       font-weight:700;padding:3px 9px;border-radius:4px;margin-bottom:8px;
@@ -700,6 +717,8 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
 
     </div><!-- /work-grid -->
 
+    <div class="work-more" id="workMore"><button type="button" class="btn btn-out" id="workMoreBtn">View more</button></div>
+
     <div style="text-align:center;margin-top:40px">
       <a href="https://drive.google.com/drive/folders/1Gdiizpc2YekrQEFxg4Ed1BQ59jfP8O--?usp=drive_link" target="_blank" rel="noopener" class="btn btn-out">View the full portfolio ↗</a>
       <p style="font-size:13px;color:var(--muted-l);margin-top:12px">All work shared with client permission.</p>
@@ -710,10 +729,25 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
   (function(){
     var tabs=document.querySelectorAll('.wtab');
     var items=document.querySelectorAll('.work-item');
+    var more=document.getElementById('workMore'),moreBtn=document.getElementById('workMoreBtn');
+    var mq=window.matchMedia('(max-width:580px)'),expanded=false,CAP=6;
+    function applyCap(){
+      var n=0,total=0;
+      items.forEach(function(it){
+        if(it.classList.contains('hidden')){it.classList.remove('capped');return}
+        total++;n++;
+        if(mq.matches&&!expanded&&n>CAP){it.classList.add('capped')}else{it.classList.remove('capped')}
+      });
+      more.classList.toggle('show',mq.matches&&!expanded&&total>CAP);
+    }
+    moreBtn.addEventListener('click',function(){expanded=true;applyCap()});
+    if(mq.addEventListener){mq.addEventListener('change',applyCap)}
+    applyCap();
     tabs.forEach(function(tab){
       tab.addEventListener('click',function(){
         tabs.forEach(function(t){t.classList.remove('active')});
         this.classList.add('active');
+        expanded=false;
         var filter=this.getAttribute('data-filter');
         items.forEach(function(item){
           if(filter==='all'){
@@ -727,6 +761,7 @@ footer{background:#142B20;color:rgba(245,241,232,.72);padding:52px 0 28px;font-s
             }
           }
         });
+        applyCap();
       });
     });
   })();
